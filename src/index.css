@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  /* COLORS */
+
+  --color-*: initial;
+  --color-primary: #24a0b5;
+  --color-primary-light: #2ba4b9;
+  --color-primary-dark: #197686;
+  --color-overlay-primary: #24a0b533;
+  --color-primary-transparent: #24a0b500;
+
+  --color-secondary: #052f35;
+  --color-secondary-light: #0e464f;
+  --color-secondary-dark: #07373f;
+  --color-secondary-darker: #052228;
+
+  --color-light: #fafafa;
+  --color-background: #02191d;
+  --color-background-dark: #041e23;
+
+  --color-neutral: #b3b3b3;
+  --color-neutral-dark: #0a0c11;
+
+  --color-overlay-light: #0a0c111a;
+  --color-overlay-dark: #00000033;
+  --color-overlay-primary: #24a0b533;
+
+  --color-error: #fb2c36;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* FONTS */
+  --font-Roboto: "Roboto", serif;
+  --font-myeongjo: "Nanum Myeongjo", serif;
+  --font-road-rage: "Road Rage", serif;
+}
+
+.container,
+.container-fluid {
+  @apply mx-auto px-6;
+}
+.container-fluid {
+  @apply px-5;
+}
+.banner {
+  background:
+    radial-gradient(
+      57.42% 106.59% at 14.02% 32.06%,
+      rgba(36, 160, 181, 0.2) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    rgba(10, 12, 17, 0.1);
+
+  background-position: center;
+}
+/* border: 1px solid #0e464f; */
+
+/* background: #08252b; */
