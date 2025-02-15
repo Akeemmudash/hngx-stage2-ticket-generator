@@ -1,7 +1,7 @@
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 
-export function useStickyNav() {
+export const useStickyNav = () => {
   const [isHidden, setIsHidden] = useState(false);
   const { scrollY } = useScroll();
   useMotionValueEvent(
@@ -17,4 +17,4 @@ export function useStickyNav() {
     200,
   );
   return isHidden;
-}
+};

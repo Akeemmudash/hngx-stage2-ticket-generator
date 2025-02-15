@@ -27,7 +27,9 @@ const FormStepLayout = ({ children }) => {
           <motion.span
             aria-label="progress bar"
             className="bg-primary block h-full rounded-full"
-            style={{ width: `${(100 / 3) * stepNumber}%` }}
+            initial={{ width: 0 }}
+            animate={{ width: `${(100 / 3) * stepNumber}%` }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           ></motion.span>
         </motion.div>
       </header>

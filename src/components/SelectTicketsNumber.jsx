@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import useTicketSelectionContext from "../hooks/useTicketSelectionContext";
 
 const options = Array.from({ length: 5 }, (_, i) => i + 1);
 
-export default function CustomSelect() {
-  const [selected, setSelected] = useState(() => options[0]);
+const SelectTicketsNumber = () => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
+  const { ticketsNumber, setTicketsNumber } = useTicketSelectionContext();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -22,21 +23,19 @@ export default function CustomSelect() {
     function handleKeyDown(event) {
       if (!isOpen) return;
 
-      const currentIndex = options.indexOf(selected);
+      const currentIndex = ticketsNumber - 1;
       if (event.key === "ArrowDown") {
-        setSelected(options[(currentIndex + 1) % options.length]);
+        setTicketsNumber(((currentIndex + 1) % options.length) + 1);
       } else if (event.key === "ArrowUp") {
-        setSelected(
-          options[(currentIndex - 1 + options.length) % options.length],
-        );
+        setTicketsNumber((currentIndex - 1 + options.length) % options.length);
       } else if (event.key === "Enter") {
-        setIsOpen(false);
+        setIsOpen(true);
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, selected]);
+  }, [isOpen, ticketsNumber, setTicketsNumber]);
 
   return (
     <div className="relative w-full" ref={selectRef}>
@@ -44,7 +43,7 @@ export default function CustomSelect() {
         className="not-even: border-secondary-dark flex w-full items-center justify-between rounded-xl border px-4 py-2 text-white shadow-md"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selected}
+        {ticketsNumber}
         <span className={`transition-transform ${isOpen ? "rotate-180" : ""}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -67,18 +66,18 @@ export default function CustomSelect() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="bg-light text-primary-dark absolute left-0 mt-2 mb-6 w-full overflow-hidden rounded-lg shadow-lg"
+          className="bg-light text-primary-dark absolute left-0 z-20 mt-2 mb-6 w-full overflow-hidden rounded-lg shadow-lg"
         >
           {options.map((option, index) => (
             <li
               key={index}
               className={`cursor-pointer px-4 py-2 ${
-                selected === option
+                ticketsNumber === option
                   ? "bg-primary-light text-white"
                   : "hover:bg-overlay-primary"
               }`}
               onClick={() => {
-                setSelected(option);
+                setTicketsNumber(option);
                 setIsOpen(false);
               }}
             >
@@ -89,4 +88,6 @@ export default function CustomSelect() {
       )}
     </div>
   );
-}
+};
+
+export default SelectTicketsNumber;
