@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import html2canvas from "html2canvas";
+import { useEffect, useRef } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import Ticket from "../components/Ticket";
+import useTicketDownload from "../hooks/useTicketDownload";
 
 const TicketBooked = () => {
   const ticketRef = useRef(null);
   const navigate = useNavigate();
   const avatar = localStorage.getItem("avatar");
+  const { isDownloading, handleDownload } = useTicketDownload(ticketRef);
 
   const { name, email, specialRequest } = JSON.parse(
     localStorage.getItem("attendeeForm"),
@@ -59,40 +60,7 @@ const TicketBooked = () => {
   }, [avatar, email, name, navigate]);
 
   const userRequest = specialRequest || "No Request";
-  const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleDownload = async () => {
-    if (!ticketRef.current) {
-      alert("Ticket reference is missing. Please try again.");
-      return;
-    }
-
-    setIsDownloading(true);
-
-    try {
-      const canvas = await html2canvas(ticketRef.current, {
-        scale: 2,
-        allowTaint: true,
-        useCORS: true,
-      });
-
-      const image = canvas.toDataURL("image/png");
-
-      if (!image) throw new Error("Failed to generate ticket image");
-
-      const link = document.createElement("a");
-      link.href = image;
-      link.download = "conference_ticket.png";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error("Error generating ticket:", error);
-      alert("An error occurred while generating the ticket. Please try again.");
-    } finally {
-      setIsDownloading(false);
-    }
-  };
   return (
     <div className="mt-16 space-y-10">
       <hgroup className="text-center">

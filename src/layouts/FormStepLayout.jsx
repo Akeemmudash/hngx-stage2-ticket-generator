@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { mapLocationtoStepNumber } from "../utils/mapLocationToStepNumber";
 import { stepLinks } from "../data";
 
-const FormStepLayout = ({ children }) => {
+const FormStepLayout = () => {
   const { pathname } = useLocation();
   const stepNumber = mapLocationtoStepNumber(pathname, stepLinks);
   const title = Object.keys(stepLinks)[stepNumber - 1] || "Ticket Selection";
@@ -32,7 +32,9 @@ const FormStepLayout = ({ children }) => {
           ></motion.span>
         </motion.div>
       </header>
-      <section className="form-step__body">{children}</section>
+      <section className="form-step__body">
+        <Outlet />
+      </section>
     </article>
   );
 };

@@ -76,3 +76,6 @@
     ),
     #072c31;
 }
+.about li {
+  @apply ms-9 list-disc;
+}

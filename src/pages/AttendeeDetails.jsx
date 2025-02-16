@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import Email from "../assets/envelope.svg";
 import Button from "../components/Button";
