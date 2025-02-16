@@ -44,6 +44,7 @@ const AttendeeDetails = () => {
       navigate("/successful-booking");
     }
   };
+  const isFreeTicket = ticketType.toLowerCase() === "regular";
 
   return (
     <>
@@ -132,8 +133,8 @@ const AttendeeDetails = () => {
           <Button buttonVariant="outline">Back</Button>
           <Button onClick={handleSubmit}>
             Get my{" "}
-            <span className="uppercase">
-              {ticketType.toLowerCase() === "regular" ? "free" : ticketType}
+            <span className={` ${isFreeTicket ? "capitalize" : "uppercase"}`}>
+              {isFreeTicket ? "free" : ticketType}
             </span>{" "}
             Ticket
           </Button>
