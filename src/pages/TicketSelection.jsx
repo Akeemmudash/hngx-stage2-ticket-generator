@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import NumberOfTickets from "../components/NumberOfTickets";
 import { TicketSelectionContext } from "../context/TicketSelectionContext";
 import SelectTicketType from "../components/TicketTypeGroup";
 import { event } from "../data";
+import { generateTicketId } from "../utils/generateTicketId";
 
 const TicketSelection = () => {
   const [ticketType, setTicketType] = useState("regular");
   const [ticketsNumber, setTicketsNumber] = useState(1);
+  const [ticketId] = useState(() => {
+    const storedTicketDetails = JSON.parse(
+      localStorage.getItem("ticketDetails"),
+    );
+
+    if (storedTicketDetails && storedTicketDetails.ticketID) {
+      return storedTicketDetails.ticketID;
+    }
+
+    const newTicketId = generateTicketId();
+    const updatedDetails = { ...storedTicketDetails, ticketID: newTicketId };
+    localStorage.setItem("ticketDetails", JSON.stringify(updatedDetails));
+    return newTicketId;
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        "ticketDetails",
+        JSON.stringify({ ticketType, ticketsNumber, ticketId }),
+      );
+    } catch (error) {
+      console.log("error", error);
+    }
+  }, [ticketType, ticketsNumber, ticketId]);
+
   return (
     <TicketSelectionContext.Provider
       value={{ ticketType, setTicketType, ticketsNumber, setTicketsNumber }}
@@ -18,7 +44,7 @@ const TicketSelection = () => {
             <h2 className="font-road-rage mb- mb-2 text-center text-5xl md:text-6xl lg:text-7xl">
               Techember Fest ”25
             </h2>
-            <p className="font-Roboto mx-auto text-sm leading-[150%] font-normal tracking-wide sm:max-w-[340px] sm:text-base">
+            <p className="font-Roboto mx-auto text-sm leading-[1.5] font-normal tracking-wide sm:max-w-[340px] sm:text-base">
               Join us for an unforgettable experience at {event.eventName} !
               Secure your spot now.
             </p>

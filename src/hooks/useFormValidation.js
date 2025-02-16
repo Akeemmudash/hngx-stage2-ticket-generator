@@ -1,6 +1,9 @@
 import { useCallback, useState } from "react";
 
 export const useFormValidation = () => {
+  const [hostedImageUrl, setHostedimageUrl] = useState(() => {
+    return localStorage.getItem("avatar") || "";
+  });
   const [formData, setFormData] = useState(() => {
     return (
       JSON.parse(localStorage.getItem("attendeeForm")) || {
@@ -14,7 +17,6 @@ export const useFormValidation = () => {
     name: "",
     email: "",
     imageUrl: "",
-    specialRequest: "",
   });
   const [showValidation, setShowValidation] = useState(false);
 
@@ -49,16 +51,6 @@ export const useFormValidation = () => {
             newErrors.imageUrl = "";
           }
           break;
-        case "specialRequest":
-          if (!value?.trim()) {
-            newErrors.specialRequest = "Please make a special request";
-          } else if (value.trim().length < 10) {
-            newErrors.specialRequest =
-              "Special request must be at least 10 characters";
-          } else {
-            newErrors.specialRequest = "";
-          }
-          break;
         default:
           break;
       }
@@ -72,11 +64,11 @@ export const useFormValidation = () => {
     const newErrors = {
       name: validateForm("name", formData.name),
       email: validateForm("email", formData.email),
-      imageUrl: validateForm("imageUrl", formData.imageUrl),
+      imageUrl: validateForm("imageUrl", hostedImageUrl),
     };
     setErrors(newErrors);
     return Object.values(newErrors).every((error) => !error);
-  }, [formData, validateForm]);
+  }, [formData, hostedImageUrl, validateForm]);
 
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
@@ -92,6 +84,8 @@ export const useFormValidation = () => {
     formData,
     setFormData,
     errors,
+    hostedImageUrl,
+    setHostedimageUrl,
   };
 };
 

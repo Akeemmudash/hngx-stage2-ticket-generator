@@ -66,7 +66,7 @@ const SelectTicketsNumber = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="bg-light text-primary-dark absolute left-0 z-20 mt-2 mb-6 w-full overflow-hidden rounded-lg shadow-lg"
+          className="bg-background text-primary-dark absolute left-0 z-20 mt-2 mb-6 w-full overflow-hidden rounded-lg shadow-lg"
         >
           {options.map((option, index) => (
             <li

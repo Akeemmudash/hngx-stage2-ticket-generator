@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import useFormValidation from "../hooks/useFormValidation";
 import ImageUploader from "../components/ImageUploader";
 import TextInputError from "../components/TextInputError";
+import { useNavigate } from "react-router-dom";
 
 const AttendeeDetails = () => {
   const {
@@ -15,12 +16,11 @@ const AttendeeDetails = () => {
     setShowValidation,
     handleInputChange,
     errors,
+    hostedImageUrl,
+    setHostedimageUrl,
   } = useFormValidation();
 
-  const [hostedImageUrl, setHostedimageUrl] = useState(() => {
-    return localStorage.getItem("avatar") || "";
-  });
-
+  const navigate = useNavigate();
   useEffect(() => {
     localStorage.setItem("attendeeForm", JSON.stringify(formData));
   }, [formData]);
@@ -39,7 +39,7 @@ const AttendeeDetails = () => {
     setShowValidation(true);
 
     if (validateAllFields()) {
-      console.log("Form submitted successfully!");
+      navigate("/successful-booking");
     }
   };
   return (

@@ -13,6 +13,9 @@
   --color-secondary: #052f35;
 
   --color-secondary-lighter: #12464e;
+  --color-ticket-border: #133d44;
+  --color-ticket-bg-secondary: #08343c;
+  --color-ticket-bg-primary: #072c31;
   --color-secondary-light: #0e464f;
   --color-secondary-dark: #07373f;
   --color-secondary-darker: #052228;
@@ -59,3 +62,17 @@
 /* border: 1px solid #0e464f; */
 
 /* background: #08252b; */
+.ticket__background {
+  background:
+    radial-gradient(
+      50% 36.17% at 50% 103.25%,
+      rgba(36, 160, 181, 0.5) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    radial-gradient(
+      50% 13.92% at 50% 0%,
+      rgba(36, 160, 181, 0.5) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    #072c31;
+}

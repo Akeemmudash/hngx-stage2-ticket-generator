@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./pages/App";
 import TicketSelection from "./pages/TicketSelection";
 import AttendeeDetails from "./pages/AttendeeDetails";
+import TicketBooked from "./pages/TicketBooked";
+import { stepLinks } from "./data";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -13,12 +15,12 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "attendee-details",
+        path: Object.values(stepLinks)[1],
         element: <AttendeeDetails />,
       },
       {
-        path: "book-successful",
-        element: "book-successful",
+        path: Object.values(stepLinks)[2],
+        element: <TicketBooked />,
       },
     ],
   },

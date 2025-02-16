@@ -7,8 +7,7 @@ const FormStepLayout = ({ children }) => {
   const { pathname } = useLocation();
   const stepNumber = mapLocationtoStepNumber(pathname, stepLinks);
   const title = Object.keys(stepLinks)[stepNumber - 1] || "Ticket Selection";
-  console.log("stepLinks", stepLinks);
-  console.log("stepNumber", stepNumber);
+  console.log("title", stepNumber - 1);
   return (
     <article className="w-full">
       <header>
