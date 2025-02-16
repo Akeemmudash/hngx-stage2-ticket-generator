@@ -20,6 +20,8 @@ const AttendeeDetails = () => {
     setHostedimageUrl,
   } = useFormValidation();
 
+  const { ticketType } = JSON.parse(localStorage.getItem("ticketDetails"));
+
   const navigate = useNavigate();
   useEffect(() => {
     localStorage.setItem("attendeeForm", JSON.stringify(formData));
@@ -42,6 +44,7 @@ const AttendeeDetails = () => {
       navigate("/successful-booking");
     }
   };
+
   return (
     <>
       <div className="border-secondary-light mt-8 rounded-4xl border p-6">
@@ -127,7 +130,13 @@ const AttendeeDetails = () => {
         </form>
         <div className="mt-4 flex w-full flex-col gap-4 sm:flex-row sm:gap-6">
           <Button buttonVariant="outline">Back</Button>
-          <Button onClick={handleSubmit}>Get my Free Ticket</Button>
+          <Button onClick={handleSubmit}>
+            Get my{" "}
+            <span className="uppercase">
+              {ticketType.toLowerCase() === "regular" ? "free" : ticketType}
+            </span>{" "}
+            Ticket
+          </Button>
         </div>
       </div>
     </>
