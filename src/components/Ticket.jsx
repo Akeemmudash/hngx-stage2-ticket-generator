@@ -38,7 +38,7 @@ const Ticket = ({
             width={140}
             height={140}
             crossOrigin="anonymous"
-            className="border-primary mx-auto my-5 rounded-xl border-4"
+            className="border-primary mx-auto my-5 rounded-xl border-4 object-cover"
           />
 
           <div className="border-ticket-border bg-ticket-bg-secondary grid w-full grid-cols-2 grid-rows-2 gap-0 rounded-md border p-1">

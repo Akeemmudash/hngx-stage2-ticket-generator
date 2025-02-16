@@ -57,12 +57,12 @@ const ImageUploader = ({
         htmlFor="imageInput"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className={`relative mx-auto flex aspect-square min-h-[240px] max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-3xl border-4 ${
+        className={`relative mx-auto flex aspect-square size-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-3xl border-4 ${
           showValidation && errors.imageUrl ? "border-error" : "border-primary"
         } bg-secondary-light`}
       >
         {imageIsUploading ? (
-          <ImageLoader></ImageLoader>
+          <ImageLoader />
         ) : hostedImageUrl ? (
           <>
             {!hasImageLoaded && (

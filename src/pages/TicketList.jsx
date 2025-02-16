@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MotionLink = motion.create(Link);
 
-const TicketLists = () => {
+const TicketList = () => {
   const tickets = JSON.parse(localStorage.getItem("tickets")) || [];
 
   if (tickets.length === 0) {
@@ -30,7 +30,7 @@ const TicketLists = () => {
               <img
                 src={ticket.avatar}
                 alt={ticket.name}
-                className="mb-3 h-16 w-16 rounded-full"
+                className="mb-3 h-16 w-16 rounded-full object-cover"
               />
             )}
             <h3 className="font-myeongjo text-lg font-semibold">
@@ -56,4 +56,4 @@ const TicketLists = () => {
   );
 };
 
-export default TicketLists;
+export default TicketList;

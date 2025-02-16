@@ -3,7 +3,7 @@ import TicketSelection from "./pages/TicketSelection";
 import AttendeeDetails from "./pages/AttendeeDetails";
 import TicketBooked from "./pages/TicketBooked";
 import { stepLinks } from "./data";
-import TicketLists from "./pages/TicketLists";
+import TicketList from "./pages/TicketList";
 import MainContentLayout from "./layouts/MainContentLayout";
 import FormStepLayout from "./layouts/FormStepLayout";
 import TicketPage from "./pages/TicketPage";
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-tickets",
-        element: <TicketLists />,
+        element: <TicketList />,
       },
       {
         path: "my-tickets/ticket-page/:ticketId",
